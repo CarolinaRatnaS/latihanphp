@@ -5,6 +5,11 @@ if(isset($_POST['submit'])){
 	
 	$koneksi = mysqli_connect("localhost", "root", "", "belajar_loginapp");
 	
+	echo $username;
+	echo "<br />";
+	echo $password;
+	echo "<br />";
+	
 	if($koneksi){
 		echo "We're connected";
 	} else {
