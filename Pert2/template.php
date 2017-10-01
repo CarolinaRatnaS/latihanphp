@@ -17,10 +17,11 @@
 	<div id="sidebar">
 		<a href="template.php?page=mahasiswa">Mahasiswa</a>
 		<a href="template.php?page=dosen">Dosen</a>
+		<a href="template.php?page=matkul">Mata Kuliah</a>
 	</div>
 	
 	<div id="konten">INI DALAH KONTEN
-		<?php include($_GET["page"] . ".php"); ?>
+		<?php include($_GET['page'] . ".php"); ?>
 	</div>
 	<div id="footer">&copy; 2017 Kalbis Institute</div>
 </body>
