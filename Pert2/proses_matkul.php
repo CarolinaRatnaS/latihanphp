@@ -11,6 +11,9 @@
 				  SET kodeMatkul = '$_POST[kodeMatkul]',
 					  namaMatkul = '$_POST[namaMatkul]'
 				  WHERE id = $_POST[id]";
+	} else if($_GET['action'] == "delete") {
+		$query = "DELETE FROM matkul
+				  WHERE id=$_GET[id]";
 	}
 	
 	mysqli_query($koneksi, $query);
