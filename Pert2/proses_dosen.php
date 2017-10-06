@@ -21,5 +21,3 @@
 	// REDIRECT ke template.php
 	header('Location: template.php?page=dosen');
 ?>
-
-

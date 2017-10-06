@@ -1,5 +1,5 @@
 <?php
- //filename: template.php
+ //filename: template1.php
  ?>
  
 <!DOCTYPE html>
@@ -16,10 +16,7 @@
 <body>
 	<div id="header"><h3>SIK | Sistem Informasi Kampus</h3></div>
 	<div id="sidebar">
-		<a href="template.php?page=mahasiswa">Mahasiswa</a>
-		<a href="template.php?page=dosen">Dosen</a>
-		<a href="template.php?page=matkul">Mata Kuliah</a>
-		<a href="template.php?page=kontak">Kontak</a>
+		<a href="template1.php?page=kontak">Kontak</a>
 	</div>
 	
 	<div id="konten">INI DALAH KONTEN
