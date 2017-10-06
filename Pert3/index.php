@@ -1,5 +1,21 @@
 <?php // filename: index.php
 
+	include(koneksi.php);
+	
+	if(isset($_POST['filter'])) {
+		//jika tombol flter di klik
+		$query = "SELECT * FROM kontak
+			  INNER JOIN kategori
+			  ON kontak.kategori_id = kategori.id
+			  WHERE kategori_id=$_POST[kategori]";
+	} else {
+	
+	$query = "SELECT * FROM kontak
+			  INNER JOIN kategori
+			  ON kontak.kategori_id = kategori.id";
+			  
+	}		  
+	$hasil = mysqli_query($db, $query);
 ?>
 
 <!DOCTYPE html>
@@ -17,8 +33,15 @@
 </div>
 <div id="filter">
 	<b>Filter berdasarkan kategori: </b>
+	<?php
+		$q2 = "SELECT * FROM kategori";
+		$h2 = mysqli_query($db, $q2);
+		while($row = mysqli_fetch_assoc($h2)) {
+	?>
+	<option  value="<?php echo $row['id'] ?>"><?php
+	?>
 	<form action="" method="post">
-		<select name="">
+		<select name="kategori">
 			<option value=""></option>
 		</select>
 		<input type="submit" name="filter" value="Filter" />
@@ -46,17 +69,25 @@
 			</tr>
 		</thead>
 		<tbody>
+		<?php
+		$i= 0;
+		while($row = mysqli_fetch_assoc($hasil)) {
+			$i++;
+		?>
 			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				<td><?php echo $i; ?></td>
+				<td><?php echo $row['nama']; ?></td>
+				<td><?php echo $row['phone']; ?></td>
+				<td><?php echo $row['email']; ?></td>
+				<td><?php echo $row['keterangan']; ?></td>
 				<td>
 					<a href="">Edit</a> | 
 					<a href="">Delete</a>
 				</td>
 			</tr>
+		<?php
+		}
+		?>
 		</tbody>
 	</table>
 </div>

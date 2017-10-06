@@ -17,7 +17,7 @@
 </div>
 <div id="konten">
 	<h2>Tambah Kategori</h2>
-	<form action="" method="post">
+	<form action="proses_tambah_kategori.php" method="post">
 		Keterangan:
 		<input type="text" name="ket" />
 		<br />
