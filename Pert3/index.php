@@ -7,20 +7,9 @@ if(isset($_POST['filter'])){
 			  INNER JOIN kategori
 			  ON kontak.kategori_id = kategori.id
 			  WHERE kategori_id=$_POST[kategori]";
-	} else {
-	
-	$query = "SELECT
-				a.nama, a.phone, a.email,
-				b.keterangan
-			  FROM
-				kontak a,
-				kategori b
-			  WHERE
-				a.kategori_id = b.id";
-			  
 	}
 
-	$query1 = "SELECT
+	$q1 = "SELECT
 				a.nama, a.phone, a.email,
 				b.keterangan
 			  FROM
@@ -29,7 +18,7 @@ if(isset($_POST['filter'])){
 			  WHERE
 				a.kategori_id = b.id";
 	
-	$hasil = mysqli_query($db, $query1);
+	$hasil = mysqli_query($db, $q1);
 	//return $hasil;
 ?>
 
@@ -51,17 +40,20 @@ if(isset($_POST['filter'])){
 	<?php
 	$q2 = "SELECT * FROM kategori";
 	$h2 = mysqli_query($db, $q2);
-	while($row = mysqli_fetch_assoc($h2))
+	while($row = mysqli_fetch_array($h2)) {
 	?>
 
-	<form action="index.php" method="POST">
+	<form action="index.php" method="post">
 		<select>
-			<?php while($row = mysqli_fetch_array($hasil)):; ?>
+			<?php while($row = mysqli_fetch_array($h2)):; ?>
 			<option value="<?php echo $row[0]; ?>"><?php echo $row[1]; ?></option>
 			<?php endwhile; ?>
 		</select>
 		<input type="submit" name="filter" value="filter" />
 	</form>
+	<?php
+	}
+	?>
 </div>
 <div id="search">
 	<b>Search: </b>
