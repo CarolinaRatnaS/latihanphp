@@ -38,6 +38,7 @@ include("koneksi.php");
 			<?php endwhile; ?>
 		</select>
 		<br />
+		<input type="hidden" name="id" value="<?php echo $row['id']; ?>" />
 		<input type="submit" value="Simpan" />
 	</form>
 </div>

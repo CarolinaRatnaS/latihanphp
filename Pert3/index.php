@@ -3,14 +3,16 @@ include("koneksi.php");
 
 if(isset($_POST['filter'])){
 	//jika tombol flter di klik
+		$id = $_GET['id'];
+		
 		$query = "SELECT * FROM kontak
 			  INNER JOIN kategori
 			  ON kontak.kategori_id = kategori.id
-			  WHERE kategori_id=$_POST[kategori]";
+			  WHERE kontak.kategori_id=$_POST[kategori]";
 	}
 
 	$q1 = "SELECT
-				a.nama, a.phone, a.email,
+				a.id, a.nama, a.phone, a.email,
 				b.keterangan
 			  FROM
 				kontak a,
@@ -40,13 +42,13 @@ if(isset($_POST['filter'])){
 	<?php
 	$q2 = "SELECT * FROM kategori";
 	$h2 = mysqli_query($db, $q2);
-	while($row = mysqli_fetch_array($h2)) {
+	while($row = mysqli_fetch_assoc($h2)) {
 	?>
 
 	<form action="index.php" method="post">
 		<select>
-			<?php while($row = mysqli_fetch_array($h2)):; ?>
-			<option value="<?php echo $row[0]; ?>"><?php echo $row[1]; ?></option>
+			<?php while($row = mysqli_fetch_assoc($h2)):; ?>
+			<option value="<?php echo $row['id']; ?>"><?php echo $row['keterangan']; ?></option>
 			<?php endwhile; ?>
 		</select>
 		<input type="submit" name="filter" value="filter" />
@@ -89,9 +91,10 @@ if(isset($_POST['filter'])){
 				<td><?php echo $row ['email']; ?></td>
 				<td><?php echo $row ['keterangan']; ?></td>
 				<td>
-					<a href="form_edit_kontak.php">Edit</a> | 
-					<a href="delete_kontak.php">Delete</a>
+					<a href="form_edit_kontak.php?id=<?php echo $row['id']; ?>">Edit</a> | 
+					<a href="delete_kontak.php?id=<?php echo $row['id']; ?>">Delete</a>
 				</td>
+				
 			</tr>
 			<?php
 		}
