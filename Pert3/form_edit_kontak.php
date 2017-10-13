@@ -38,7 +38,10 @@
 	$q = "SELECT * FROM kategori";
 	$h = mysqli_query($db, $q);
 	?>
-	<form action="proses_edit_kontak.php" method="post">
+	<form action="proses_edit_kontak.php" method="post" enctype="multipart/form-data">
+		Icon:
+		<input type="file" name="gambar" />
+		<br />
 		Nama:
 		<input type="text" value="<?php echo $row['nama']; ?>" name="nama"  />
 		<br />

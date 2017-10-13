@@ -21,7 +21,10 @@ include("koneksi.php");
 	$q = "SELECT * FROM kategori";
 	$h = mysqli_query($db, $q);
 	?>
-	<form action="proses_tambah_kontak.php" method="post">
+	<form action="proses_tambah_kontak.php" method="post" enctype="multipart/form-data">
+		Icon:
+		<input type="file" name="gambar" />
+		<br />
 		Nama:
 		<input type="text" name="nama" />
 		<br />
@@ -34,7 +37,7 @@ include("koneksi.php");
 		Kategori:
 		<select name="kategori">
 			<?php while($row = mysqli_fetch_array($h)):; ?>
-			<option value="<?php echo $row[0]; ?>"><?php echo $row[1]; ?></option>
+			<option value="<?php echo $row['id']; ?>"><?php echo $row['keterangan']; ?></option>
 			<?php endwhile; ?>
 		</select>
 		<br />

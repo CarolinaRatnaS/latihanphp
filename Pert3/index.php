@@ -9,10 +9,11 @@ if(isset($_POST['filter'])){
 			  INNER JOIN kategori
 			  ON kontak.kategori_id = kategori.id
 			  WHERE kontak.kategori_id=$_POST[kategori]";
+		
 	}
 
 	$q1 = "SELECT
-				a.id, a.nama, a.phone, a.email,
+				a.id, a.icon_path, a.nama, a.phone, a.email,
 				b.keterangan
 			  FROM
 				kontak a,
@@ -59,10 +60,11 @@ if(isset($_POST['filter'])){
 </div>
 <div id="search">
 	<b>Search: </b>
-	<form action="" method="post">
+	<form action="index.php" method="post">
 		<input type="text" name="search_text" />
 		<input type="submit" name="cari" value="Cari" />
 	</form>
+	
 </div>
 <div id="konten">
 	<h2>Kontak</h2>
@@ -71,6 +73,7 @@ if(isset($_POST['filter'])){
 		<thead>
 			<tr>
 				<th>No.</th>
+				<th>Icon</th>
 				<th>Nama</th>
 				<th>Hp.</th>
 				<th>Email</th>
@@ -86,6 +89,7 @@ if(isset($_POST['filter'])){
 			?>
 			<tr>
 				<td><?php echo $i; ?></td>
+				<td><img src="<?php echo $row ['icon_path']; ?>" width="50" ></td>
 				<td><?php echo $row ['nama']; ?></td>
 				<td><?php echo $row ['phone']; ?></td>
 				<td><?php echo $row ['email']; ?></td>
