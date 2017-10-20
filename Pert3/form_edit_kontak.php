@@ -5,14 +5,7 @@
 	$id = $_GET['id'];
 	
 	//query
-	$query = "SELECT
-				a.id, a.nama, a.phone, a.email,
-				b.keterangan
-			  FROM
-				kontak a,
-				kategori b
-			  WHERE
-				a.kategori_id && b.id = $_GET[id]";
+	$query = "SELECT * FROM kontak WHERE id=$id";
 	$hasil = mysqli_query($db, $query);
 	
 	//tampil
@@ -53,9 +46,9 @@
 		<br />
 		Kategori:
 		<select name="kategori">
-			<?php while($row = mysqli_fetch_array($h)):; ?>
-			<option value="<?php echo $row[0]; ?>"><?php echo $row[1]; ?></option>
-			<?php endwhile; ?>
+			<?php while($row = mysqli_fetch_array($h)){
+				echo "<option value=$row[id]>$row[keterangan]</option>";
+			} ?>
 		</select>
 		<input type="hidden" name="id" value="<?php echo $row['id']; ?>" />
 		<br />
