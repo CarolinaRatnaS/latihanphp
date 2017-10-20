@@ -3,16 +3,27 @@ include("koneksi.php");
 
 if(isset($_POST['filter'])){
 	//jika tombol flter di klik
-		$id = $_GET['id'];
+		$id = $_POST['kategori'];
 		
 		$query = "SELECT * FROM kontak
 			  INNER JOIN kategori
 			  ON kontak.kategori_id = kategori.id
 			  WHERE kontak.kategori_id=$_POST[kategori]";
+			  echo $query;
 		
-	}
+	} else if(isset($_POST['cari'])) {
+		$query = "SELECT * FROM kontak 
+			      INNER JOIN kategori
+			      ON kontak.kategori_id = kategori.id
+			      WHERE 
+			      	kontak.nama LIKE '%$_POST[search_text]%' OR
+			      	kontak.phone LIKE '%$_POST[search_text]%' OR
+			      	kontak.email LIKE '%$_POST[search_text]%' OR 
+			      	kategori.keterangan LIKE '%$_POST[search_text]%'
+			      	";
+	} else 
 
-	$q1 = "SELECT
+		$query = "SELECT
 				a.id, a.icon_path, a.nama, a.phone, a.email,
 				b.keterangan
 			  FROM
@@ -21,7 +32,7 @@ if(isset($_POST['filter'])){
 			  WHERE
 				a.kategori_id = b.id";
 	
-	$hasil = mysqli_query($db, $q1);
+	$hasil = mysqli_query($db, $query);
 	//return $hasil;
 ?>
 
@@ -41,26 +52,27 @@ if(isset($_POST['filter'])){
 <div id="filter">
 	<b>Filter berdasarkan kategori: </b>
 	<?php
-	$q2 = "SELECT * FROM kategori";
-	$h2 = mysqli_query($db, $q2);
-	while($row = mysqli_fetch_assoc($h2)) {
+	//$q2 = "SELECT * FROM kategori";
+	//$h2 = mysqli_query($db, $q2);
+	//while($row = mysqli_fetch_assoc($h2)) {
 	?>
 
-	<form action="index.php" method="post">
-		<select>
-			<?php while($row = mysqli_fetch_assoc($h2)):; ?>
+	<form action="" method="post">
+		<select name="kategori">
+			<?php 
+			$q2 = "SELECT * FROM kategori";
+			$h2 = mysqli_query($db, $q2);
+			while($row = mysqli_fetch_assoc($h2)) { ?>
 			<option value="<?php echo $row['id']; ?>"><?php echo $row['keterangan']; ?></option>
-			<?php endwhile; ?>
+			<?php } ?>
 		</select>
 		<input type="submit" name="filter" value="filter" />
+		<button href="index.php"> Reset Filter </button>
 	</form>
-	<?php
-	}
-	?>
 </div>
 <div id="search">
 	<b>Search: </b>
-	<form action="index.php" method="post">
+	<form action="" method="post">
 		<input type="text" name="search_text" />
 		<input type="submit" name="cari" value="Cari" />
 	</form>
