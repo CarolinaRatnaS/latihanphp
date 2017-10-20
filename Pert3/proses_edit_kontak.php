@@ -13,6 +13,7 @@
 	$query = "UPDATE
 				kontak
 			  SET
+				
 				nama = '$nama',
 				phone = '$phone',
 				email = '$email',
