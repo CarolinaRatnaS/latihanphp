@@ -3,6 +3,13 @@
 	//1. Koneksi
 	include("koneksi.php");
 	
+	session_start();
+	
+	if(!isset($_SESSION['login']) || $_SESSION['login'] != 1){
+		header('Location: login.php');
+		//echo "BELUM LOGIN";
+	}
+	
 	//2. Query
 	
 	// Dapatkan extensi dari file yang diupload

@@ -2,6 +2,13 @@
 	//koneksi
 	include("koneksi.php");
 	
+	session_start();
+	
+	if(!isset($_SESSION['login']) || $_SESSION['login'] != 1){
+		header('Location: login.php');
+		//echo "BELUM LOGIN";
+	}
+	
 	//query
 	$query = "SELECT * FROM kategori";
 	$hasil = mysqli_query($db, $query);

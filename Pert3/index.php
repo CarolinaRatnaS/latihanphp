@@ -1,6 +1,13 @@
 <?php // filename: index.php
 include("koneksi.php");
 
+session_start();
+	
+if(!isset($_SESSION['login']) || $_SESSION['login'] != 1){
+	header('Location: login.php');
+	//echo "BELUM LOGIN";
+}
+
 if(isset($_POST['filter'])){
 	//jika tombol flter di klik
 		$id = $_POST['kategori'];

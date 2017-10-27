@@ -2,6 +2,13 @@
 	// 1. koneksi
 	include("koneksi.php");
 	
+	session_start();
+	
+	if(!isset($_SESSION['login']) || $_SESSION['login'] != 1){
+		header('Location: login.php');
+		//echo "BELUM LOGIN";
+	}
+	
 	//2. data dari form
 	$id = $_POST['id'];
 	$nama = mysqli_real_escape_string($db, $_POST['nama']);
