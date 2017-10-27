@@ -120,10 +120,15 @@ if(isset($_POST['filter'])){
 				
 			</tr>
 			<?php
-		}
+		}	
 		?>
 		</tbody>
 	</table>
+</div>
+<div id="logout">
+	<br />
+	<a href="logout.php">logout</a>
+	<!-- <button href="logout.php"> LOGOUT </button> -->
 </div>
 </body>
 </html>
