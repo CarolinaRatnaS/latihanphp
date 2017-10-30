@@ -1,14 +1,40 @@
-<?php include("../includes/functions.php"); ?>	
+<?php require_once("../includes/db_connection.php"); ?>
+<?php require_once("../includes/functions.php"); ?>	
+
+<?php
+	// 2. Perform database query
+	$query = "SELECT * FROM subjects WHERE visible = 1 ORDER BY position ASC";
+	$result = mysqli_query($connection, $query);
+	confirm_query($result);
+?>
+
 <?php include("../includes/layouts/header.php"); ?>		
 
 	<div id="main">
 		<div id="navigation">
-			&nbsp;
+			<ul class="subjects">
+			<?php
+				// 3. Use returned data (if any)
+				while($row = mysqli_fetch_row($result)) {
+					// oitput dat from each row
+					//var_dump($row);
+					//echo "<hr />";
+				//}
+			?>
+			<li><?php echo $subject["menu_name"] . " (" . $subject["id"] . ")"; ?></li>
+			<?php
+				}
+			?>
+		</ul> 
 		</div>
 		<div id="page">
 			<h2>Manage Content</h2>
 			
 		</div>
 	</div>
+	<?php
+		// 4. Release returned data
+		mysqli_free_result($result);
+	?>
 
 <?php include("../includes/layouts/footer.php"); ?>
