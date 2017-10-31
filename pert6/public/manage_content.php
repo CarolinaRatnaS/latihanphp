@@ -6,29 +6,14 @@
 	<div id="main">
 		<div id="navigation">
 			<ul class="subjects">
+			<?php $subject_set = find_all_subjects(); ?>
 			<?php
-				<?php
-				// 2. Perform database query
-				$query = "SELECT * FROM subjects WHERE visible = 1 ORDER BY position ASC";
-				$subject_set = mysqli_query($connection, $query);
-				confirm_query($page_set);
-				?>
-			
-				// 3. Use returned data (if any)
+			//<?php
 				while($row = mysqli_fetch_row($subject_set)) {
-					
 			?>
 			<li>
 				<?php echo $subject["menu_name"]; ?>
-				<?php
-				// 2. Perform database query
-				$query = "SELECT * FROM pages 
-						  WHERE visible = 1 
-						  AND subject_id = {$subject["id"]} 
-						  ORDER BY position ASC";
-				$page_set = mysqli_query($connection, $query);
-				confirm_query($page_set);
-				?>
+				<?php $page_set = find_pages_for_subject($subject["id"]); ?>
 				
 				<ul class="pages">
 					<?php
